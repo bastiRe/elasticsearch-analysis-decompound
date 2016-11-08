@@ -53,7 +53,11 @@ public class DecompoundTokenFilter extends TokenFilter {
             termAtt.setEmpty().append(token.txt);
             offsetAtt.setOffset(token.startOffset, token.endOffset);
             if (!subwordsonly) {
-                posIncAtt.setPositionIncrement(0);
+                if (token.position == 0) {
+                    posIncAtt.setPositionIncrement(0);
+                } else {
+                    posIncAtt.setPositionIncrement(1);
+                }
             }
             return true;
         }
